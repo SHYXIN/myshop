@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
 CART_SESSION_ID = 'cart'
+
+# 邮件服务器设置
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
