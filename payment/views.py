@@ -5,7 +5,7 @@ from orders.models import Order
 from .tasks import payment_completed
 
 # Create your views here.
-
+# 
 
 
 # 实例化支付网关
@@ -15,6 +15,7 @@ def payment_process(request):
     order_id = request.session.get('order_id')
     order = get_object_or_404(Order, id=order_id)
     total_cost = order.get_total_cost()
+    # https://sandbox.braintreegateway.com/merchants/2bm456f7xp76j258/transactions/advanced_search
     # 信用卡设置
     # 4111 1111 1111 1111
     # 123

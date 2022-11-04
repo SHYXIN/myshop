@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig', # 购物车
     'orders.apps.OrdersConfig', # 订单
     'payment.apps.PaymentConfig',  # 支付
+    'coupons.apps.CouponsConfig', # 优惠券
 ]
 
 MIDDLEWARE = [
