@@ -15,13 +15,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.i18n import i18n_patterns
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('cart/', include('cart.urls', namespace='cart')),  # 购物车
-    path('orders/', include('orders.urls',namespace='orders')), # 订单
-    path('payment/', include('payment.urls', namespace='payment')), # 支付
-    path('coupon/', include('coupons.urls', namespace='coupons')), # 优惠券
-    
+# urlpatterns = i18n_patterns(
+#     path('admin/', admin.site.urls),
+#     path('cart/', include('cart.urls', namespace='cart')),  # 购物车
+#     path('orders/', include('orders.urls',namespace='orders')), # 订单
+#     path('payment/', include('payment.urls', namespace='payment')), # 支付
+#     path('coupon/', include('coupons.urls', namespace='coupons')), # 优惠券
+#     path('rosetta/', include('rosetta.urls')),  # 翻译用
+#     path('', include('shop.urls', namespace='shop')),  # 商店
+# )
+
+
+from django.utils.translation import gettext_lazy as _
+
+urlpatterns = i18n_patterns(
+    path(_('admin/'), admin.site.urls),
+    path(_('cart/'), include('cart.urls', namespace='cart')),  # 购物车
+    path(_('orders/'), include('orders.urls',namespace='orders')), # 订单
+    path(_('payment/'), include('payment.urls', namespace='payment')), # 支付
+    path(_('coupon/'), include('coupons.urls', namespace='coupons')), # 优惠券
+    path('rosetta/', include('rosetta.urls')),  # 翻译用
     path('', include('shop.urls', namespace='shop')),  # 商店
-]
+)

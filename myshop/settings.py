@@ -44,12 +44,20 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig', # 订单
     'payment.apps.PaymentConfig',  # 支付
     'coupons.apps.CouponsConfig', # 优惠券
+    
+    'rosetta', # 翻译文件管理
+    
+    'parler', # 翻译model
+    'localflavor', # 本地化
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    
+    'django.middleware.locale.LocaleMiddleware', # 本地化 需根据sesion选择语言，必须是这个位置
+    
+    'django.middleware.common.CommonMiddleware', 
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -111,7 +119,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
+
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('es', _('Spanish')),
+)
 
 TIME_ZONE = 'UTC'
 
@@ -159,3 +174,26 @@ BRAINTREE_CONF = braintree.Configuration(
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale/'),  # 告诉django本地化文件在哪里找
+)
+
+PARLER_LANGUAGES = {
+    None:(
+        {'code': 'en'},
+        {'code': 'es'},
+    ),
+    'default':{
+        'fallback': 'en',
+        'hide_untranslated': False,
+    }
+}
+
+
+# redis
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 1
+
